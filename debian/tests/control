@@ -1,0 +1,5 @@
+Tests: require
+Depends: node-ordered-read-streams
+
+Test-Command: mocha -R spec
+Depends: @builddeps@

@@ -1,0 +1,120 @@
+Description: Use assert module instead of expect which is not in debian
+Author: Jérémy Lal <kapouer@melix.org>
+Forwarded: not-needed
+Last-Update: 2019-01-07
+--- a/test/main.js
++++ b/test/main.js
+@@ -1,6 +1,6 @@
+ /* global it, describe */
+ 
+-var expect = require('expect');
++var assert = require('assert');
+ 
+ var miss = require('mississippi');
+ 
+@@ -40,7 +40,7 @@
+       new OrderedStreams(writable);
+     }
+ 
+-    expect(withWritable).toThrow('All input streams must be readable');
++    assert.throws(withWritable, {message:'All input streams must be readable'});
+ 
+     done();
+   });
+@@ -52,16 +52,16 @@
+ 
+     var streams = new OrderedStreams([s1, s2, s3]);
+ 
+-    function assert(results) {
+-      expect(results.length).toEqual(3);
+-      expect(results[0]).toEqual({value: 'stream 1'});
+-      expect(results[1]).toEqual({value: 'stream 2'});
+-      expect(results[2]).toEqual({value: 'stream 3'});
++    function assertFn(results) {
++      assert.strictEqual(results.length, 3);
++      assert.deepStrictEqual(results[0], {value: 'stream 1'});
++      assert.deepStrictEqual(results[1], {value: 'stream 2'});
++      assert.deepStrictEqual(results[2], {value: 'stream 3'});
+     }
+ 
+     pipe([
+       streams,
+-      concat(assert)
++      concat(assertFn)
+     ], done);
+   });
+ 
+@@ -74,13 +74,13 @@
+ 
+     var streams = new OrderedStreams(s);
+ 
+-    function assert(results) {
+-      expect(results.length).toEqual(3);
++    function assertFn(results) {
++      assert.strictEqual(results.length, 3);
+     }
+ 
+     pipe([
+       streams,
+-      concat(assert)
++      concat(assertFn)
+     ], done);
+   });
+ 
+@@ -103,16 +103,16 @@
+ 
+     var streams = new OrderedStreams([s1, s2, s3]);
+ 
+-    function assert(results) {
+-      expect(results.length).toEqual(3);
+-      expect(results[0]).toEqual({value: 'stream 1'});
+-      expect(results[1]).toEqual({value: 'stream 2'});
+-      expect(results[2]).toEqual({value: 'stream 3'});
++    function assertFn(results) {
++      assert.strictEqual(results.length, 3);
++      assert.deepStrictEqual(results[0], {value: 'stream 1'});
++      assert.deepStrictEqual(results[1], {value: 'stream 2'});
++      assert.deepStrictEqual(results[2], {value: 'stream 3'});
+     }
+ 
+     pipe([
+       streams,
+-      concat(assert)
++      concat(assertFn)
+     ], done);
+   });
+ 
+@@ -126,15 +126,15 @@
+ 
+     var streams = new OrderedStreams([s, s2]);
+ 
+-    function assert(err) {
+-      expect(err.message).toEqual('stahp!');
++    function assertFn(err) {
++      assert.strictEqual(err.message, 'stahp!');
+       done();
+     }
+ 
+     pipe([
+       streams,
+       concat()
+-    ], assert);
++    ], assertFn);
+   });
+ 
+   it('emits received data before a stream errors downstream', function (done) {
+@@ -149,12 +149,12 @@
+     var streams = new OrderedStreams([s2, s]);
+ 
+     function assertData(chunk, enc, next) {
+-      expect(chunk).toEqual({value: 'Im ok!'});
++      assert.deepStrictEqual(chunk, {value: 'Im ok!'});
+       next();
+     }
+ 
+     function assertErr(err) {
+-      expect(err.message).toEqual('stahp!');
++      assert.strictEqual(err.message, 'stahp!');
+       done();
+     }
+ 

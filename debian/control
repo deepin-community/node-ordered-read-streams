@@ -1,0 +1,30 @@
+Source: node-ordered-read-streams
+Section: javascript
+Priority: optional
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Pirate Praveen <praveen@debian.org>
+Build-Depends:
+ debhelper (>= 9)
+ , dh-buildinfo
+ , nodejs (>= 10)
+ , mocha
+ , node-through2
+ , node-mississippi
+ , node-is-stream (>= 1.0.1)
+Standards-Version: 4.3.0
+Homepage: https://github.com/armed/ordered-read-streams#readme
+Vcs-Git: https://salsa.debian.org/js-team/node-ordered-read-streams.git
+Vcs-Browser: https://salsa.debian.org/js-team/node-ordered-read-streams
+
+Package: node-ordered-read-streams
+Architecture: all
+Depends:
+ ${misc:Depends}
+ , nodejs (>= 10)
+ , node-is-stream (>= 1.0.1)
+Description: combines array of streams into one read stream in strict order
+ `ordered-read-streams` handles all data/errors from input streams in parallel,
+ but emits data/errors in strict order in which streams are passed to
+ constructor. This is `objectMode = true` stream.
+ .
+ Node.js is an event-based server-side JavaScript engine.

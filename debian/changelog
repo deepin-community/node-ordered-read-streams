@@ -1,0 +1,27 @@
+node-ordered-read-streams (1.0.1-2) unstable; urgency=medium
+
+  * Team upload
+  * (Build-)Depends nodejs >= 10
+
+ -- Jérémy Lal <kapouer@melix.org>  Thu, 10 Jan 2019 21:31:33 +0100
+
+node-ordered-read-streams (1.0.1-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version 1.0.1
+  * Section: javascript
+  * Vcs-* fields
+  * Honor nocheck
+  * Standards-Version 4.3.0
+  * Patch to run tests without expect module
+  * Drop node-should dependency
+  * Build-Depends mississippi
+  * Use @builddeps for autopkgtest
+
+ -- Jérémy Lal <kapouer@melix.org>  Mon, 07 Jan 2019 12:42:56 +0100
+
+node-ordered-read-streams (1.0-1) unstable; urgency=low
+
+  * Initial release (Closes: #845968)
+
+ -- Pirate Praveen <praveen@debian.org>  Sun, 27 Nov 2016 16:35:11 +0530

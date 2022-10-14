@@ -1,0 +1,8 @@
+--- a/index.js
++++ b/index.js
+@@ -1,4 +1,4 @@
+-var Readable = require('readable-stream/readable');
++var Readable = require('stream').Readable;
+ var util = require('util');
+ 
+ function isReadable(stream) {
